@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang = "ru">
+<head>
+  <meta charset="UTF-8">
+<title>ЗП + премия</title>
+</head>
+<body>
+ <script>
+
+function premia(){
+    let x = 10000;
+    function inner(){
+        x = x +10000 ;
+         //console.log(x);
+         return x;
+    };
+    return inner;
+}
+let sotr1 = premia();
+let zp1 = sotr1();
+zp1 = sotr1();
+zp1 = sotr1();
+
+let sotr2 = premia();
+let zp2 = sotr2();
+zp2 = sotr2();
+zp2 = sotr2();
+zp2 = sotr2();
+zp2 = sotr2();
+
+let sotr3 = premia();
+let zp3 = sotr3();
+
+document.write("Общая зарплата сотрудника 1 = " + zp1 + "<br>");
+document.write("Общая зарплата сотрудника 2 = " + zp2 + "<br>");
+document.write("Общая зарплата сотрудника 3 = " + zp3 + "<br>");
+
+    </script>
+    </body>
+</html>

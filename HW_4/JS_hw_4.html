@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Домашняя работа №4</title>
+    </head>
+    <body>
+
+       <h1>Генератор последовательности простых чисел
+        </h1>
+		<p>Создайте primeSequenceGenerator(start = 2), возвращающую функцию nextPrime(), генерирующую следующее простое число с помощью замыкания.</p>
+
+
+    <script>
+
+	const count = +prompt("Введите количество чисел", 10);
+	if (!count || isNaN(count) || count <= 0) {
+    alert('Количество должно быть положительным числом!!!');
+}
+
+	function primeSequenceGenerator(start = 2) {
+    let currentNumber = start - 1; // Начальное значение перед первым вызовом
+
+    function isPrime(num) {
+        if (num <= 1) return false;
+        for (let i = 2; i * i <= num; i++) {
+            if (num % i === 0) return false;
+        }
+        return true;
+    }
+
+    return function nextPrime() {
+        while(true) {
+            currentNumber++;
+            if(isPrime(currentNumber)) {
+                return currentNumber;
+            }
+        }
+    };
+}
+
+	 const gen = primeSequenceGenerator();
+
+    for(let i = 1; i <= count; i++) {
+    document.write(`${i}-е простое число: ${gen()}<br>`);
+}
+
+
+</script>
+
+
+    </body>
+</html>

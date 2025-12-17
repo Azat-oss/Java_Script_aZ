@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Title</title>
+    </head>
+    <body>
+    <script>
+
+    class InvalidDigitError extends Error {
+    constructor(message) {
+    super(message);
+    this.name = "InvalidDigitError";
+    }
+    }
+
+    try {
+    const input = prompt("Введите цифру от 0 до 9", "");
+
+    // Преобразуем строку в число
+    const count = +input;
+
+    // Проверяем: null (нажата Отмена), не число, не целое, вне диапазона
+    if (input === null) {
+        throw new InvalidDigitError("Ввод отменён");
+    }
+
+    if (isNaN(count)) {
+        throw new InvalidDigitError("Введено не число");
+    }
+
+    if (!Number.isInteger(count)) {
+        throw new InvalidDigitError("Число должно быть целым");
+    }
+
+    if (count < 0 || count > 9) {
+        throw new InvalidDigitError("Число должно быть от 0 до 9");
+    }
+
+    // Если всё хорошо
+   document.write(`Корректная цифра: ${count}`);
+
+} catch (error) {
+    if (error instanceof InvalidDigitError) {
+        document.write(`Ошибка ввода (${error.name})  ${error.message}`);
+    } else {
+        // На случай других непредвиденных ошибок
+       document.write("Неизвестная ошибка: " + error.message);
+    }
+}
+
+
+
+    </script>
+    </body>
+</html>

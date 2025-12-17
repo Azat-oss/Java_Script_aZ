@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Домашняя работа №2</title>
+    </head>
+    <body>
+
+       <h1>Домашняя работа №2
+        </h1>
+
+    <script>
+
+    let n = +prompt("Введите кол-во", 12);
+    const max = 11;
+    // 1 способ
+     let a = [n];
+     for (let i = 0; i < n; i++) {
+         a[i] = Math.round(Math.random() * max);
+     }
+
+     document.write(`<span style="font-weight:bold; color:red;">№35 Дан массив размера N = ${n} <br>Найти минимальный из его локальных максимумов</span><br>`);
+
+     document.write(a.join("<br>"));
+
+
+     function Local_max(array, index){
+      if (index===0 && array[index]>=array[index+1]) return true;
+      else if (index===array.length-1 && array[index]>= array[index-1]) return true;
+      else return array[index]>array[index-1]&& array[index]>array[index+1];
+     }
+
+     let minLocal_max = Infinity;
+     for (let i=0;i<a.length;i++){
+      if(Local_max(a,i)){
+       minLocal_max = Math.min(minLocal_max,a[i]);
+      }
+     }
+
+     if (minLocal_max!==Infinity) document.write
+     (`<br>Минимальный локальный максимум: ${minLocal_max}`);
+     else document.write('<br>Нет локальных максимумов');
+
+     document.write(`<span style="font-weight:bold; color:red;"<br><br>№54 Дан целочисленный массив А размера N=${n}.</span><br>`);
+     document.write(a.join("<br>"));
+     document.write("<br>Переписать в в новый целочисленный массив В все четные числа из исходного массива<br>(в том же порядке) и вывести размер полученного массива В и его содержимое<br>");
+     let b = [];
+     a.forEach((num)=>{
+      if (num % 2===0){b.push(num);}
+     });
+
+     document.write ("<br>Размер нового массива:",b.length);
+     document.write ("<br>Четные числа:<br>",b.join("<br>"));
+
+     document.write(`<span style="font-weight:bold; color:red;"<br><br>№98 дан целочисленный массив размера N= ${n}.<br> Удалить из массива все элементы встречающиеся менее трех раз<br>и вывести размер полученного массива</span><br>`);
+     document.write(a.join("<br>"));
+
+
+     let frequencyMap = new Map();
+     a.forEach(element => {
+     if(frequencyMap.has(element)){
+        frequencyMap.set(element, frequencyMap.get(element)+1);
+     } else{
+        frequencyMap.set(element, 1);
+     }
+     });
+
+     let c = [];
+     frequencyMap.forEach((count, element) => {
+     if(count >= 3){
+        for(let i=0; i<count; i++){
+            c.push(element);
+        }
+       }
+     });
+     document.write ("<br>Размер нового массива:",c.length);
+     document.write ("<br>Новый массив:<br>",c.join("<br>"));
+
+
+</script>
+
+
+    </body>
+</html>

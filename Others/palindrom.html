@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Title</title>
+    </head>
+    <body>
+    <script>
+        const inputText = prompt("Введите строку").toLowerCase().replaceAll(" ","");
+
+        function palindrom(str) {
+        for (let i = 0; i <str.length / 2; i++) {
+          if (str[i] !== str[str.length - 1 - i]) {
+            return false;
+          }
+        }
+        return true;
+      }
+
+      document.writeln(palindrom(inputText));
+
+    </script>
+
+    </body>
+</html>

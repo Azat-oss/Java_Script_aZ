@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Домашняя работа №3</title>
+    </head>
+    <body>
+
+       <h1>Сортировка строк матрицы
+        </h1>
+
+    <script>
+	let rows = +prompt("Введите количество строк", 5);
+    let cols = +prompt("Введите количество столбцов", 5);
+
+
+    if (isNaN(rows) || isNaN(cols) || rows <= 0 || cols <= 0) {
+    document.write("Введите положительные числа!!!");
+    } else {
+
+    function createRandomMatrix(rows, cols) {
+      let matrix = [];
+      for (let i = 0; i < rows; i++) {
+        let row = [];
+        for (let j = 0; j < cols; j++) {
+          row.push(Math.floor(Math.random() * 100));
+        }
+        matrix.push(row);
+      }
+      return matrix;
+    }
+
+    // Функция для сортировки строк по возрастанию
+    function sortRows(matrix) {
+      for (let i = 0; i < matrix.length; i++) {
+        matrix[i].sort((a, b) => a - b);
+      }
+      return matrix;
+    }
+
+	 // Функция для сортировки строк по убыванию
+    function sortRowsdecreasing(matrix) {
+      for (let i = 0; i < matrix.length; i++) {
+        matrix[i].sort((a, b) => b - a);
+      }
+      return matrix;
+    }
+
+	// Функция для сортировки четных чисел по возрастанию
+
+	function sortEvenNumbers(matrix) {
+    for (let i = 0; i < matrix.length; i++) {
+    const row = matrix[i];
+    // Собираем чётные числа и их индексы
+    const evens = [];
+    const indices = [];
+
+    for (let j = 0; j < row.length; j++) {
+      if (row[j] % 2 === 0) {
+        evens.push(row[j]);
+        indices.push(j);
+      }
+    }
+
+    // Сортируем чётные по возрастанию
+    evens.sort((a, b) => a - b);
+
+    // Возвращаем на места
+    for (let k = 0; k < indices.length; k++) {
+      row[indices[k]] = evens[k];
+    }
+    }
+    return matrix;
+    }
+
+	// Функция для сортировки нечетных чисел по убыванию
+
+	function sortIndicesNumbers(matrix) {
+    for (let i = 0; i < matrix.length; i++) {
+    const row = matrix[i];
+    // Собираем чётные числа и их индексы
+    const evens = [];
+    const indices = [];
+
+    for (let j = 0; j < row.length; j++) {
+      if (row[j] % 2 !== 0) {
+        evens.push(row[j]);
+        indices.push(j);
+      }
+    }
+
+    // Сортируем чётные по возрастанию
+    evens.sort((a, b) => b - a);
+
+    // Возвращаем на места
+    for (let k = 0; k < indices.length; k++) {
+      row[indices[k]] = evens[k];
+    }
+    }
+    return matrix;
+    }
+
+
+	// Создание и сортировка матрицы
+    let matrix = createRandomMatrix(rows, cols);
+    let sortedMatrix = sortRows([...matrix.map(row => [...row])]);
+	let sortedMatrix2 = sortRowsdecreasing([...matrix.map(row => [...row])]);
+	let sortedMatrix3 = sortEvenNumbers([...matrix.map(row => [...row])]);
+	let sortedMatrix4 = sortIndicesNumbers([...matrix.map(row => [...row])]);
+
+    // Вывод исходной матрицы
+    document.write("<h2>Исходная матрица:</h2><pre>");
+    for (let i = 0; i < matrix.length; i++) {
+      document.write(matrix[i].join("\t") + "<br>");
+    }
+
+
+    // Вывод отсортированной матрицы
+    document.write("<h2>После сортировки строк по возрастанию исходной матрицы:</h2>");
+    for (let i = 0; i < sortedMatrix.length; i++) {
+      document.write(sortedMatrix[i].join("\t") + "<br>");
+    }
+
+	// Вывод отсортированной матрицы
+    document.write("<h2>После сортировки строк по убыванию исходной матрицы:</h2>");
+    for (let i = 0; i < sortedMatrix2.length; i++) {
+      document.write(sortedMatrix2[i].join("\t") + "<br>");
+    }
+
+	// Вывод отсортированной матрицы
+    document.write("<h2>После сортировки четных чисел по возрастанию исходной матрицы:</h2>");
+    for (let i = 0; i < sortedMatrix3.length; i++) {
+      document.write(sortedMatrix3[i].join("\t") + "<br>");
+    }
+
+	// Вывод отсортированной матрицы
+    document.write("<h2>После сортировки нечетных чисел по убыванию исходной матрицы:</h2>");
+    for (let i = 0; i < sortedMatrix4.length; i++) {
+      document.write(sortedMatrix4[i].join("\t") + "<br>");
+    }
+
+  }
+
+
+</script>
+
+
+    </body>
+</html>

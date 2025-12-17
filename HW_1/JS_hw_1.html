@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Home work 1</title>
+    </head>
+    <body>
+        <h1>Домашняя работа №1
+        </h1>
+        <p> Даны катеты прямоугольного треугольника a и b. <br>
+            Найти его гипотенузу C и периметр P. <br>
+            C = sqrt(a^2 + b^2),<br> P = a + b + c.</p>
+        <script>
+            let a=parseFloat(prompt("Введите первый катет"));
+            let b=parseFloat(prompt("Введите второй катет"));
+            if (isNaN(a)|| isNaN(b)||a<=0||b<=0){
+                alert("Введите корректные значения(положительные числа)!!!")
+            }
+            else {
+                let c=Math.sqrt(a*a+b*b);
+                let p=a+b+c;
+                document.write("<p>Катет а =" +a.toFixed(2));
+                document.write("<p>Катет b =" +b.toFixed(2));
+                document.write("<p>Гипотенуза c =" +c.toFixed(2));
+                document.write("<p>Периметр =" +p.toFixed(2))
+            }
+
+
+
+
+
+        </script>
+    </body>
+</html>
