@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Домашняя работа № 7.2</title>
+    </head>
+    <body>
+    <script>
+
+    class InvalidBinaryError extends Error {
+    constructor(message) {
+    super(message);
+    this.name = "InvalidBinaryError";
+    }
+    }
+
+
+    try {
+    const input = prompt("Ведите двоичное число (только нули и/или единицы):");
+
+    // Преобразуем строку в число
+    const count = +input;
+
+    // Проверяем: null (нажата Отмена), не число, не целое, вне диапазона
+    if (input === null) {
+        throw new InvalidBinaryError("Ввод отменён");
+    }
+
+    if (isNaN(count)) {
+        throw new InvalidBinaryError("Введено не число");
+    }
+
+    if (!Number.isInteger(count)) {
+        throw new InvalidBinaryError("Число должно быть целым");
+    }
+
+        const binaryStr = input.trim();
+
+    if (!/^[01]+$/.test(binaryStr)) {
+        throw new InvalidBinaryError("Число должно быть 0 или 1");
+    }
+
+       if (binaryStr.length > 53) {
+        throw new InvalidBinaryError(`Число слишком большое: количество введеных цифр равна ${binaryStr.length} > 53`);
+    }
+
+
+   document.write(`Двоичное число: ${binaryStr}`);
+        let decimal;
+        decimal = parseInt(binaryStr, 2);
+        const format = decimal.toLocaleString('ru-RU');
+        document.write(`<br>Десятичное представление числа ${binaryStr} = ${format}`);
+
+
+    } catch (error) {
+    if (error instanceof InvalidBinaryError) {
+        document.write(`Ошибка ввода (${error.name})  ${error.message}`);
+    } else {
+
+       document.write("Неизвестная ошибка: " + error.message);
+    }
+    }
+
+
+
+    </script>
+    </body>
+</html>

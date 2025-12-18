@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Домашняя работа № 7.3</title>
+    </head>
+    <body>
+    <script>
+
+    class BankrotError extends Error {
+    constructor(message) {
+        super(message);
+        this.name = "bankrot";
+    }
+    }
+
+
+    class Money {
+    constructor(rubles = 0, kopecks = 0) {
+        if (rubles < 0 || kopecks < 0) {
+            throw new BankrotError("Cумма не может быть отрицательной");
+        }
+
+        // Перевод всё в копейки
+        this.totalKopecks = Math.floor(rubles) * 100 + Math.floor(kopecks);
+
+        if (this.totalKopecks < 0) {
+            throw new BankrotError("Cумма не может быть отрицательной");
+        }
+    }
+
+    // Метод вывода
+    toString() {
+    const rubles = Math.floor(this.totalKopecks / 100);
+    const kopecks = this.totalKopecks % 100;
+
+    const formattedRubles = rubles.toLocaleString('ru-RU');
+    const formattedKopecks = kopecks.toString().padStart(2, '0');
+
+    return `${formattedRubles} руб. ${formattedKopecks} коп.`;
+    }
+
+
+    add(rubles, kopecks = 0) {
+        if (rubles < 0 || kopecks < 0) {
+            throw new BankrotError("Нельзя добавить отрицательную сумму");
+        }
+        const addKopecks = Math.floor(rubles) * 100 + Math.floor(kopecks);
+        this.totalKopecks += addKopecks;
+
+        if (this.totalKopecks < 0) {
+            throw new BankrotError("Операция привела к отрицательному балансу");
+        }
+    }
+
+
+    subtract(rubles, kopecks = 0) {
+        const subKopecks = Math.floor(rubles) * 100 + Math.floor(kopecks);
+        this.totalKopecks -= subKopecks;
+
+        if (this.totalKopecks < 0) {
+            throw new BankrotError("Недостаточно средств");
+        }
+    }
+    }
+
+    try {
+    const myMoney = new Money(0, 00);
+    document.write(`Начальный баланс: ${myMoney.toString()}<br>`);
+
+    myMoney.add(5000, 55);
+    document.write(`После пополнения: ${myMoney.toString()}<br>`);
+
+    myMoney.subtract(1000, 55);
+    document.write(`После снятия: ${myMoney.toString()}<br>`);
+
+    myMoney.subtract(100000, 25);
+    document.write(`После снятия: ${myMoney.toString()}<br>`);
+
+
+
+    } catch (error) {
+    if (error.name === "bankrot") {
+        document.write(`<br><b>Ошибка (${error.name}):</b> ${error.message}`);
+    } else {
+        document.write(`<br>Неизвестная ошибка: ${error.message}`);
+    }
+    }
+
+
+    </script>
+    </body>
+</html>

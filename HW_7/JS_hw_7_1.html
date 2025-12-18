@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
     <head>
         <meta charset="UTF-8" />
-        <title>Title</title>
+        <title>Домашняя работа №7.1</title>
     </head>
     <body>
     <script>
@@ -37,17 +37,17 @@
         throw new InvalidDigitError("Число должно быть от 0 до 9");
     }
 
-    // Если всё хорошо
+
    document.write(`Корректная цифра: ${count}`);
 
-} catch (error) {
+    } catch (error) {
     if (error instanceof InvalidDigitError) {
         document.write(`Ошибка ввода (${error.name})  ${error.message}`);
     } else {
-        // На случай других непредвиденных ошибок
+
        document.write("Неизвестная ошибка: " + error.message);
     }
-}
+    }
 
 
 
