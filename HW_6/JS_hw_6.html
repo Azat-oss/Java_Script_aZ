@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Домашняя работа №6</title>
+    </head>
+    <body>
+    <script>
+      const text = `1. We live on the tenth floor. — Мы живем на одиннадцатом этаже.
+      2. Today is the 1st (first) of August. — Сегодня 1 августа.
+      3. I would like to get the third glass of juice. — Я хотела бы получить третий стакан сока.
+      4. The fifth and the seventh tests were easy. — Пятое и седьмое тестовое задание были легкими.
+      5. My first choice was the best. — Мой первый выбор был лучшим.
+      6. YoYoYo!!! - ЁЁЁ!!!`;
+
+      document.write("<h2>Исходный текст:</h2>");
+      document.writeln(text);
+
+      document.write("<h2>1. Только цифры</h2>");
+      const result1 = text.replace(/[^1-9]/g, '');
+      document.writeln(result1);
+
+      const result2 = text
+      .toLowerCase()
+      .replace(/[^a-z]/g, '');
+
+
+      document.write("<h2>2. Только маленькие англ буквы (без учета регистра)</h2>");
+      document.writeln(result2);
+
+
+       document.write("<h2>3. Только большие русские буквы (Ё то не в диапазоне)</h2>");
+      const result3 = text.replace(/[^А-Я]/g, '');
+      document.writeln(result3);
+
+
+      document.write("<h2>4. Убрать знаки препинания все и непечатные символы</h2>");
+      // Удаляем всё, кроме букв, цифр и пробелов
+      const cleaned = text.replace(/[^a-zA-Z0-9\s]/g, '');
+
+      // убираем лишние пробелы
+      const result4 = cleaned.replace(/\s+/g, ' ').trim();
+
+      document.writeln(result4);
+
+    </script>
+
+    </body>
+</html>
