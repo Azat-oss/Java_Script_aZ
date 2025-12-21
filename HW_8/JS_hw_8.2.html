@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Домашняя работа №8.2</title>
+        <style>
+        table {
+        border-collapse: collapse;
+        margin: 20px;
+        }
+        td {
+        border: 1px solid #999;
+        padding: 6px 10px;
+        text-align: center;
+        font-family: Arial, sans-serif;
+        }
+        </style>
+    </head>
+
+    <body>
+        <p> Сгенерировать массив случайных слов<br>
+            Вывести их в таблицу по алфавиту<br>
+
+        </p>
+        <script>
+
+        const dictionary = [
+        "молоко", "словарь", "щука", "груша", "лыжи",
+        "предохранитель", "земляника", "кнопка", "лиса", "коммутатор",
+        "терка", "город", "персик", "дом", "женщина",
+        "кирпич", "экскаватор", "школа", "окно", "утка",
+        "белка", "ананас", "волк", "яблоко", "колесо","person","apple","name","man","face",
+        "body","skin","blond","oval","active"
+        ];
+
+        const words =[];
+            for (let i=0; i<25;i++){
+                const randomWords = dictionary[Math.floor(Math.random()*dictionary.length)];
+                words.push(randomWords);
+            }
+
+            words.sort((a, b) => a.localeCompare(b, ['ru', 'en']));
+
+            const table = document.createElement('table');
+
+        for (let i = 0; i < words.length; i++) {
+        const row = document.createElement('tr');
+        const cell = document.createElement('td');
+        cell.textContent = words[i];
+
+        if (/^[a-zA-Z]+$/.test(words[i])) {
+            cell.style.color = 'red';
+            } else  {
+            cell.style.color = 'green';
+            }
+
+        row.appendChild(cell);
+        table.appendChild(row);
+        }
+         document.body.appendChild(table);
+        </script>
+    </body>
+</html>

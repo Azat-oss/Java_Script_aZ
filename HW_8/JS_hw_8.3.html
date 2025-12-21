@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <title>Домашняя работа №8.3</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            margin: 20px;
+            width: 100%;
+            max-width: 500px;
+        }
+        th, td {
+            border: 1px solid #999;
+            padding: 10px;
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+        th {
+            background-color: #f0f0f0;
+            cursor: pointer;
+        }
+
+        button {
+            padding: 8px 16px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+     <p> Есть таблица товароы с неколькими колонками (полями) - id, Наименование, Цена<br>
+	     При нажатии на заголовое колонки выполнить сортировку по ней<br>
+
+     </p>
+
+     <div class="controls">
+        <button id="resetBtn">Сброс фильтра</button>
+        <button id="newProductsBtn">Обновить список товаров</button>
+    </div>
+
+<table id="Table">
+    <thead>
+        <tr>
+            <th id="id_products">№</th>
+            <th id="name_products">Название</th>
+            <th id="price_products">Цена</th>
+        </tr>
+    </thead>
+    <tbody id="body"></tbody>
+</table>
+
+
+<script>
+
+    const names = [
+        "молоко", "хлеб", "яблоко", "груша", "книга", "ручка", "стол", "стул",
+        "лампа", "окно", "дверь", "тетрадь", "карандаш", "апельсин", "банан",
+        "чай", "кофе", "сахар", "соль", "масло"
+    ];
+
+
+    let originalProducts = [];
+    for (let i = 0; i < 15; i++) {
+        const priceValue = Math.random() * 1000 + 50;
+        originalProducts.push({
+            id: i + 1,
+            name: names[Math.floor(Math.random() * names.length)],
+            price: parseFloat(priceValue.toFixed(2))
+        });
+    }
+
+    let products = [...originalProducts];
+
+    // Отображение таблицы
+    function showTable() {
+        let html = '';
+        for (let p of products) {
+            const formattedPrice = p.price.toLocaleString('ru-RU', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+
+            });
+            html += `<tr><td>${p.id}</td><td>${p.name}</td><td>${formattedPrice}</td></tr>`;
+        }
+        document.getElementById('body').innerHTML = html;
+    }
+
+
+    function sort(field) {
+        if (field === 'id' || field === 'price') {
+            products.sort((a, b) => a[field] - b[field]);
+        } else {
+            products.sort((a, b) => a.name.localeCompare(b.name, 'ru'));
+        }
+        showTable();
+    }
+
+     function resetOrder() {
+            products = [...originalProducts];
+            showTable();
+        }
+
+     function newProducts() {
+        originalProducts = [];
+        for (let i = 0; i < 15; i++) {
+        const priceValue = Math.random() * 1000 + 50;
+        originalProducts.push({
+            id: i + 1,
+            name: names[Math.floor(Math.random() * names.length)],
+            price: parseFloat(priceValue.toFixed(2))
+        });
+        }
+
+        products = [...originalProducts];
+            showTable();
+        }
+
+    document.getElementById('id_products').onclick = () => sort('id');
+    document.getElementById('name_products').onclick = () => sort('name');
+    document.getElementById('price_products').onclick = () => sort('price');
+    document.getElementById('resetBtn').onclick = resetOrder;
+    document.getElementById('newProductsBtn').onclick = newProducts;
+
+    showTable();
+</script>
+
+</body>
+</html>
