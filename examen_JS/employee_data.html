@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <title>Экзаменационная работа</title>
+     <link rel="stylesheet" href="styles.css">
+
+
+
+</head>
+<body>
+
+<div class="formTotal">
+
+    <div class="form_title">Информация о сотруднике</div>
+
+    <div class ="form_employee">
+        <div class="column">
+             <h3>Общие данные</h3>
+             <label for ="last_name"> Фамилия:</label>
+             <input type="text" id="last_name" placeholder="Иванов">
+             <label for = "name"> Имя:</label>
+             <input type="text" id="name" placeholder="Иван">
+             <label for = "patron_name"> Отчество:</label>
+             <input type="text" id ="patron_name" placeholder="Иванович">
+
+            <label>Пол:</label>
+             <div class ="radio_group">
+                 <label>
+                     <input type="radio" name="gender" value="man"> Мужской
+
+                 </label>
+                  <label>
+
+                     <input type="radio" name="gender" value="women"> Женский
+                 </label>
+         </div>
+
+
+    </div>
+
+    <div class="column">
+            <h3>Персональные данные</h3>
+            <label for ="passport"> Паспорт:</label>
+            <input type="text" id="passport">
+            <label for="citizen">Гражданство:</label>
+            <select id="citizen">
+            <option value="">— Выберите —</option>
+            <option value="ru">Россия</option>
+            <option value="other">Другое</option>
+            </select>
+
+            <label for="birthdate">Дата рождения:</label>
+            <input type="date" id="birthdate">
+            <label for ="birthpalace"> Место рождения:</label>
+            <input type="text" id="birthpalace">
+            <label for="date_of_issue">Дата выдачи:</label>
+            <input type="date" id="date_of_issue">
+            <label for="code_departamend">Код подразделения:</label>
+            <input type="text" id="code_departamend">
+
+
+    </div>
+
+
+    <div class="column">
+            <h3>Специальные данные</h3>
+            <label for ="INN"> ИНН:</label>
+            <input type="text" id="INN">
+            <label for="snils">СНИЛС:</label>
+            <input type="text" id="snils">
+
+           <label for="policy">Полис:</label>
+           <input type="text" id="policy">
+
+
+    </div>
+
+
+    </div>
+
+    <div class="button-row">
+    <button onclick="ShowData()">Отобразить</button>
+    <button onclick="SaveData()">Сохранить</button>
+    <button onclick="ClearData()">Очистить</button>
+
+    </div>
+
+
+
+
+</div>
+
+
+
+
+<script>
+
+
+    function ClearData() {
+    if (confirm("Очистить все поля?")) {
+      document.querySelectorAll('input, select').forEach(el => {
+        if (el.type === 'checkbox' || el.type === 'radio') {
+          el.checked = false;
+        } else {
+          el.value = '';
+        }
+      });
+    }
+  }
+
+
+</script>
+
+</body>
+</html>
