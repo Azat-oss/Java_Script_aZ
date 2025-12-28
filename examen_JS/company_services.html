@@ -146,6 +146,8 @@
      auto_switch: { name: "Монтаж автоматического выключателя", unit: "компл.", price: 3000 },
   };
 
+  let isCalculated = false;
+
   // Проверка имени и телефона Обязательное заполнение
   function validateForm() {
   const last_nameInput = document.getElementById('last_name');
@@ -268,9 +270,10 @@
     /*document.getElementById('total-amount').textContent = total.toFixed(2);*/
 
     document.getElementById('total-amount').textContent = total.toLocaleString('ru-RU', {
-  minimumFractionDigits: 2,
-  maximumFractionDigits: 2
-});
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2});
+
+    isCalculated = total > 0;
   }
 
 
@@ -326,6 +329,9 @@
 
   function ShowData() {
         if (!validateForm()) return;
+
+    if (!isCalculated) {alert("Нажмите кнопку «Рассчитать»"); return;}
+
     // Сбор данных
   const lastName = document.getElementById('last_name').value.trim() || '—';
   const firstName = document.getElementById('name').value.trim() || '—';
@@ -390,6 +396,7 @@
 
   function ShowJSON(){
    if (!validateForm()) return;
+   if (!isCalculated) {alert("Выберить хотя бы одну услугу, объем работ и нажмите кнопку «Рассчитать»"); return;}
 
   const lastName = document.getElementById('last_name').value.trim() || '';
   const firstName = document.getElementById('name').value.trim() || '';
