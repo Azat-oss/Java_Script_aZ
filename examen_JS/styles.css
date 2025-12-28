@@ -51,7 +51,7 @@
     }
 
     input[type="text"],
-    input[type="date"],
+    input[type="date"],input[type="tel"],
     select {
       width: 100%;
       padding: 6px;
@@ -82,8 +82,8 @@
 
     button {
 
-      margin: 20px 20px 0 auto;
-      padding: 10px 100px;
+      margin: -2px 20px 0 auto;
+      padding: 12px 100px;
       background: #4CAF50;
       color: white;
       border: none;
@@ -97,3 +97,139 @@
     button:hover {
       background: #45a049;
     }
+
+/*новое*/
+
+.services-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+.services-table th,
+.services-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+.services-table th {
+  background-color: #f9f9f9;
+}
+.services-table select {
+  width: 100%;
+  padding: 4px;
+  border-radius: 4px;
+}
+.services-table button {
+  width: 24px;
+  padding: 2px;
+  font-size: 14px;
+  cursor: pointer;
+}
+.services-table input[type="number"] {
+  width: 50px;
+  padding: 2px;
+  text-align: center;
+}
+
+/* === Управление шириной колонок === */
+.form_employee {
+  display: flex;
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Левая колонка — уже */
+.column.general {
+  flex: 0 0 190px; /* фиксированная ширина */
+}
+
+/* Средняя колонка — шире */
+.column.services {
+  flex: 1; /* занимает оставшееся пространство */
+}
+
+/* === Таблица услуг === */
+.services-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 12px;
+}
+
+.services-table th,
+.services-table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.services-table th {
+  background-color: #f9f9f9;
+  font-weight: bold;
+}
+
+.services-table select {
+  width: 100%;
+  padding: 6px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+/* Контейнер для +/- и input */
+.qty-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+}
+
+.qty-controls input[type="number"] {
+  width: 60px;
+  padding: 15px;
+  text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.qty-controls button {
+
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  font-size: 16px;
+  font-weight: bold;
+  background: #4CAF50;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.qty-controls button:hover {
+  background: #45a049;
+}
+
+/* Радио НДС — отдельный блок */
+.vat-group {
+  margin: 15px 0;
+  text-align: left;
+}
+
+/* Итог */
+.total-row {
+  margin-top: 10px;
+  text-align: right;
+  font-weight: bold;
+  font-size: 18px;
+  color: #2e7d32;
+}
+
+.output-area {
+  margin-top: 20px;
+  padding: 50px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #f9f9f9;
+
+}

@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <title>Заявка</title>
+     <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="formTotal">
+
+    <div class="form_title">Оформление заявки</div>
+
+  <div class="form_employee">
+
+  <div class="column general">
+    <h3>Данные клиента:</h3>
+    <label for="last_name">Фамилия:</label>
+    <input type="text" id="last_name" placeholder="Иванов" oninput="FirstLetter(this)" required minlength="2" maxlength="20" pattern="[А-Яа-яЁё\s]+" title="Фамилия должно содержать только русские буквы и быть не короче 2 символов">
+    <label for="name">Имя:</label>
+    <input type="text" id="name" placeholder="Иван" oninput="FirstLetter(this)"  required minlength="2" maxlength="20" pattern="[А-Яа-яЁё\s]+" title="Имя должно содержать только русские буквы и быть не короче 2 символов">
+    <label for="patron_name">Отчество:</label>
+    <input type="text" id="patron_name" placeholder="Иванович" oninput="FirstLetter(this)" required minlength="2" maxlength="20" pattern="[А-Яа-яЁё\s]+" title="Отчество должно содержать только русские буквы и быть не короче 2 символов">
+    <label for="phone">Мобильный телефон:</label>
+    <input type="tel" id="phone" placeholder="8ХХХХХХХХХХ" maxlength="11" pattern="[78]\d{10}" title="Телефон должен начинаться с 7 или 8 и содержать 11 цифр">
+
+    <label for="addInfo">Дополнительная информация:</label>
+    <input type="text" id="addInfo">
+
+  </div>
+
+  <div class="column services">
+    <h3 style="text-align: center;">Расчет стоимости оказываемых услуг:</h3>
+
+    <table class="services-table">
+      <thead>
+        <tr>
+          <th><input type="checkbox" id="select-all" title="Выбрать всё" onchange="toggleAllRows()"></th>
+          <th>Услуга</th>
+          <th>Ед.</th>
+          <th>Цена, ₽</th>
+          <th>Кол-во</th>
+          <th>Сумма, ₽</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr id="row1">
+    <td><input type="checkbox" checked></td>
+    <td>
+      <select id="service1" onchange="onServiceChange(1)">
+        <option value="">— Выберите —</option>
+        <option value="light">Монтаж светильника</option>
+        <option value="cable">Прокладка кабеля</option>
+        <option value="auto_switch">Монтаж автоматического выключателя</option>
+      </select>
+    </td>
+    <td id="unit1">—</td>
+    <td id="price1">—</td>
+    <td>
+      <div class="qty-controls">
+        <button type="button" onclick="adjustQty(1, -1)">–</button>
+        <input type="number" id="qty1" value="0" min="0">
+        <button type="button" onclick="adjustQty(1, 1)">+</button>
+      </div>
+    </td>
+    <td id="sum1">0</td>
+  </tr>
+  <tr id="row2">
+    <td><input type="checkbox" checked></td>
+    <td>
+      <select id="service2" onchange="onServiceChange(2)">
+        <option value="">— Выберите —</option>
+        <option value="light">Монтаж светильника</option>
+        <option value="cable">Прокладка кабеля</option>
+        <option value="auto_switch">Монтаж автоматического выключателя</option>
+      </select>
+    </td>
+    <td id="unit2">—</td>
+    <td id="price2">—</td>
+    <td>
+      <div class="qty-controls">
+        <button type="button" onclick="adjustQty(2, -1)">–</button>
+        <input type="number" id="qty2" value="0" min="0">
+        <button type="button" onclick="adjustQty(2, 1)">+</button>
+      </div>
+    </td>
+    <td id="sum2">0</td>
+  </tr>
+
+
+  <tr id="row3">
+    <td><input type="checkbox" checked></td>
+    <td>
+      <select id="service3" onchange="onServiceChange(3)">
+        <option value="">— Выберите —</option>
+        <option value="light">Монтаж светильника</option>
+        <option value="cable">Прокладка кабеля</option>
+        <option value="auto_switch">Монтаж автоматического выключателя</option>
+      </select>
+    </td>
+    <td id="unit3">—</td>
+    <td id="price3">—</td>
+    <td>
+      <div class="qty-controls">
+        <button type="button" onclick="adjustQty(3, -1)">–</button>
+        <input type="number" id="qty3" value="0" min="0">
+        <button type="button" onclick="adjustQty(3, 1)">+</button>
+      </div>
+    </td>
+    <td id="sum3">0</td>
+  </tr>
+      </tbody>
+    </table>
+
+    <div class="total-row">
+      Итого: <span id="total-amount">0.00</span> ₽
+    </div>
+
+    <div class="vat-group">
+      <label><input type="radio" name="vat" value="no" checked> Без НДС</label>
+      <label><input type="radio" name="vat" value="yes"> С НДС (20%)</label>
+    </div>
+
+    <div
+         style="justify-content: flex-start; margin-top: 10px;">
+  <button type="button" onclick="calculateTotal()" style="margin-left: 530px;">Рассчитать</button>
+    </div>
+  </div>
+</div>
+
+    <div class="button-row">
+    <button onclick="ShowData()">Отобразить</button>
+    <button onclick="ShowJSON()">Отобразить/Сохранить JSON</button>
+    <button onclick="ClearData()">Очистить</button> </div>
+
+<div id="output" class="output-area"></div>
+<div id="output_JSON" class="output-area"></div>
+</div>
+
+<script>
+
+
+   const SERVICES = {
+    light: { name: "Монтаж светильника", unit: "шт", price: 10_000 },
+    cable: { name: "Прокладка кабеля", unit: "м", price: 600 },
+     auto_switch: { name: "Монтаж автоматического выключателя", unit: "компл.", price: 3000 },
+  };
+
+  // Проверка имени и телефона Обязательное заполнение
+  function validateForm() {
+  const last_nameInput = document.getElementById('last_name');
+  const nameInput = document.getElementById('name');
+  const phoneInput = document.getElementById('phone');
+
+  // Сброс старых ошибок
+  last_nameInput.setCustomValidity('');
+  nameInput.setCustomValidity('');
+  phoneInput.setCustomValidity('');
+
+  let isValid = true;
+
+    // Проверка фамилии
+  const last_name = last_nameInput.value.trim();
+  if (!last_name) {
+    last_nameInput.setCustomValidity('Поле "Фамилия" обязательно для заполнения');
+    isValid = false;
+  } else if (!/^[А-Яа-яЁё\s]{2,50}$/.test(last_name)) {
+    last_nameInput.setCustomValidity('Фамилия должно содержать только русские буквы и быть от 2 до 50 символов');
+    isValid = false;
+  }
+
+
+
+  // Проверка имени
+  const name = nameInput.value.trim();
+  if (!name) {
+    nameInput.setCustomValidity('Поле "Имя" обязательно для заполнения');
+    isValid = false;
+  } else if (!/^[А-Яа-яЁё\s]{2,50}$/.test(name)) {
+    nameInput.setCustomValidity('Имя должно содержать только русские буквы и быть от 2 до 50 символов');
+    isValid = false;
+  }
+
+  // Проверка телефона
+  const phone = phoneInput.value.trim();
+  if (!phone) {
+    phoneInput.setCustomValidity('Поле "Мобильный телефон" обязательно');
+    isValid = false;
+  } else if (!/^[78]\d{10}$/.test(phone)) {
+    phoneInput.setCustomValidity('Телефон должен содержать 11 цифр и начинаться с 7 или 8 (например: 89991234567)');
+    isValid = false;
+  }
+
+  // Принудительно обновить UI валидации
+  last_nameInput.reportValidity();
+  nameInput.reportValidity();
+  phoneInput.reportValidity();
+
+  return isValid;
+}
+
+
+
+  // Обновление единицы и цены при выборе услуги (без расчёта итога!)
+  function onServiceChange(rowNum) {
+    const select = document.getElementById(`service${rowNum}`);
+    const serviceId = select.value;
+    const unitCell = document.getElementById(`unit${rowNum}`);
+    const priceCell = document.getElementById(`price${rowNum}`);
+
+    if (serviceId && SERVICES[serviceId]) {
+      unitCell.textContent = SERVICES[serviceId].unit;
+      priceCell.textContent = SERVICES[serviceId].price;
+    } else {
+      unitCell.textContent = "—";
+      priceCell.textContent = "—";
+    }
+  }
+
+  // Изменение количества (без расчёта итога)
+  function adjustQty(rowNum, delta) {
+    const input = document.getElementById(`qty${rowNum}`);
+    let val = parseInt(input.value) || 0;
+    val = Math.max(0, val + delta);
+    input.value = val;
+  }
+
+  // Переключение Выбрать всё для чекбоксов
+  function toggleAllRows() {
+    const selectAll = document.getElementById('select-all');
+    const checkboxes = document.querySelectorAll('tbody input[type="checkbox"]');
+    checkboxes.forEach(cb => cb.checked = selectAll.checked);
+  }
+
+  // Обновление чекбоксов
+  function updateSelectAll() {
+    const allCheckboxes = document.querySelectorAll('tbody input[type="checkbox"]');
+    const allChecked = Array.from(allCheckboxes).every(cb => cb.checked);
+    document.getElementById('select-all').checked = allChecked;
+  }
+
+
+  function calculateTotal() {
+    let total = 0;
+    for (let i = 1; i <= 3; i++) {
+      const rowChecked = document.querySelector(`#row${i} input[type="checkbox"]`).checked;
+      const serviceId = document.getElementById(`service${i}`).value;
+      const qty = parseInt(document.getElementById(`qty${i}`).value) || 0;
+      const sumCell = document.getElementById(`sum${i}`);
+
+      if (!rowChecked || !serviceId || !SERVICES[serviceId]) {
+        sumCell.textContent = "0";
+        continue;
+      }
+
+      const price = SERVICES[serviceId].price;
+      const sum = price * qty;
+      sumCell.textContent = sum.toLocaleString('ru-RU', {
+  minimumFractionDigits: 2,
+  maximumFractionDigits: 2
+});
+      total += sum;
+    }
+
+    const withVat = document.querySelector('input[name="vat"][value="yes"]:checked');
+    if (withVat) total *= 1.2;
+
+    /*document.getElementById('total-amount').textContent = total.toFixed(2);*/
+
+    document.getElementById('total-amount').textContent = total.toLocaleString('ru-RU', {
+  minimumFractionDigits: 2,
+  maximumFractionDigits: 2
+});
+  }
+
+
+  function ClearData() {
+    if (!confirm("Очистить все поля?")) return;
+
+    document.querySelectorAll('input[type="text"], input[type="number"], input[type="tel"], select').forEach(el => {
+  el.value = '';
+});
+
+    document.querySelectorAll('input[type="checkbox"]').forEach(el => {
+      el.checked = false;
+    });
+
+    // Сброс радиокнопок
+    document.querySelectorAll('input[name="gender"], input[name="vat"]').forEach(el => {
+      el.checked = false;
+    });
+
+     document.querySelector('input[name="vat"][value="no"]').checked = true;
+
+    // Сброс ячеек
+    for (let i = 1; i <= 3; i++) {
+      document.getElementById(`unit${i}`).textContent = "—";
+      document.getElementById(`price${i}`).textContent = "—";
+      document.getElementById(`sum${i}`).textContent = "0";
+      document.getElementById(`qty${i}`).value = "0";
+    }
+
+    document.getElementById('total-amount').textContent = "0.00";
+    document.getElementById('select-all').checked = false;
+
+    const outputDiv = document.getElementById('output');
+  if (outputDiv) {
+    outputDiv.innerHTML = '';
+  }
+    const outputDiv2 = document.getElementById('output_JSON');
+  if (outputDiv) {
+    outputDiv2.innerHTML = '';
+  }
+  }
+
+
+  // Инициализация: привязка событий для "выбрать всё" и обновления его состояния
+  document.addEventListener('DOMContentLoaded', () => {
+    // Привязываем updateSelectAll к чекбоксам строк
+    document.querySelectorAll('tbody input[type="checkbox"]').forEach(cb => {
+      cb.addEventListener('change', updateSelectAll);
+    });
+    // Изначально обновим состояние "Выбрать всё"
+    updateSelectAll();
+  });
+
+  function ShowData() {
+        if (!validateForm()) return;
+    // Сбор данных
+  const lastName = document.getElementById('last_name').value.trim() || '—';
+  const firstName = document.getElementById('name').value.trim() || '—';
+  const patronymic = document.getElementById('patron_name').value.trim() || '—';
+  const phone = document.getElementById('phone').value.trim() || '—';
+  const addInfo = document.getElementById('addInfo').value.trim() || '—';
+
+  // Сбор услуг
+  let servicesHtml = '';
+  let hasSelectedService = false;
+
+  for (let i = 1; i <= 3; i++) {
+    const rowChecked = document.querySelector(`#row${i} input[type="checkbox"]`).checked;
+    const serviceId = document.getElementById(`service${i}`).value;
+    const qty = parseInt(document.getElementById(`qty${i}`).value) || 0;
+
+    if (rowChecked && serviceId && SERVICES[serviceId] && qty > 0) {
+      const service = SERVICES[serviceId];
+      const sum = service.price * qty;
+
+
+      servicesHtml += `
+        <div><strong>${service.name}</strong>: ${qty} ${service.unit} × ${service.price} ₽ = ${sum.toLocaleString('ru-RU', {
+          style: 'decimal',
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2
+        })} ₽</div>
+      `;
+      hasSelectedService = true;
+    }
+  }
+
+  if (!hasSelectedService) {
+    servicesHtml = '<div>Нет выбранных услуг</div>';
+  }
+
+  // Налог
+  const vat = document.querySelector('input[name="vat"]:checked')?.value === 'yes' ? 'С НДС (20%)' : 'Без НДС';
+
+  // Итог
+  const total = document.getElementById('total-amount').textContent;
+
+  // Выходная форма
+  const outputHtml = `
+    <h3>Заявка</h3>
+    <p><strong>ФИО:</strong> ${lastName} ${firstName} ${patronymic}</p>
+    <p><strong>Мобильный телефон:</strong> ${phone}</p>
+    <p><strong>Дополнительная информация:</strong> ${addInfo}</p>
+    <p><strong>Услуги:</strong></p>
+    <div style="margin-left: 20px;">${servicesHtml}</div>
+    <p><strong>Налог:</strong> ${vat}</p>
+    <p><strong>Итого:</strong> <strong>${total} ₽</strong></p>
+  `;
+
+  // Отображаем
+  const outputDiv = document.getElementById('output');
+  outputDiv.innerHTML = outputHtml;
+  outputDiv.style.display = 'block';
+}
+
+
+
+  function ShowJSON(){
+   if (!validateForm()) return;
+
+  const lastName = document.getElementById('last_name').value.trim() || '';
+  const firstName = document.getElementById('name').value.trim() || '';
+  const patronymic = document.getElementById('patron_name').value.trim() || '';
+  const phone = document.getElementById('phone').value.trim() || '';
+  const addInfo = document.getElementById('addInfo').value.trim() || '';
+
+  const services = [];
+  for (let i = 1; i <= 3; i++) {
+    const rowChecked = document.querySelector(`#row${i} input[type="checkbox"]`).checked;
+    const serviceId = document.getElementById(`service${i}`).value;
+    const qty = parseInt(document.getElementById(`qty${i}`).value) || 0;
+
+    if (rowChecked && serviceId && SERVICES[serviceId] && qty > 0) {
+      const service = SERVICES[serviceId];
+      const sum = service.price * qty;
+      services.push({
+        наименование: service.name,
+        единица: service.unit,
+        количество: qty,
+        цена_за_единицу: service.price,
+        сумма: sum
+      });
+    }
+  }
+
+  const vatIncluded = document.querySelector('input[name="vat"]:checked')?.value === 'yes';
+
+  let totalNumeric = 0;
+  for (let i = 1; i <= 3; i++) {
+    const rowChecked = document.querySelector(`#row${i} input[type="checkbox"]`).checked;
+    const serviceId = document.getElementById(`service${i}`).value;
+    const qty = parseInt(document.getElementById(`qty${i}`).value) || 0;
+    if (rowChecked && serviceId && SERVICES[serviceId]) {
+      totalNumeric += SERVICES[serviceId].price * qty;
+    }
+  }
+  if (vatIncluded) {
+    totalNumeric *= 1.2;
+  }
+
+    const dataObject = {
+    ФИО: [lastName, firstName, patronymic].filter(Boolean).join(' ') || '—',
+    Телефон: phone || '—',
+    Дополнительная_информация: addInfo || '—',
+    Услуги: services.length > 0 ? services : 'Нет выбранных услуг',
+    Налог: vatIncluded ? 'С НДС (20%)' : 'Без НДС',
+    Итого_руб: parseFloat(totalNumeric.toFixed(2))
+  };
+
+    let jsonData = JSON.stringify(dataObject, null, 2);
+    const outputDiv2 = document.getElementById('output_JSON');
+    outputDiv2.textContent = jsonData;
+    outputDiv2.style.display = 'block';
+
+    const blob = new Blob([jsonData], { type: 'application/json;charset=utf-8' });
+    const now = new Date();
+    const dateStr = now.toISOString().split('T')[0];
+    const fileName = `заявка_${dateStr}.json`;
+
+    const link = document.createElement('a');
+  if (link.download !== undefined) {
+    const url = URL.createObjectURL(blob);
+    link.href = url;
+    link.download = fileName;
+    link.style.visibility = 'hidden';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  };
+
+
+  }
+
+
+  // для заглавных букв в поле ФИО
+
+function FirstLetter(input) {
+  let value = input.value.trim();
+  if (value === '') return;
+
+  input.value = value
+    .split(/\s+/)
+
+    .map(word =>
+      word.charAt(0).toUpperCase() +
+      word.slice(1).toLowerCase()
+    )
+    .join(' ');
+}
+
+
+
+</script>
+
+</body>
+</html>
